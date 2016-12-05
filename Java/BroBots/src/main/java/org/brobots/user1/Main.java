@@ -8,7 +8,16 @@ import org.brobots.user1.details.*;
 public class Main {
 
     public static void main(String[] args) {
-        // create desktop PC
+        Desktop desktop = defineDesktopPC();
+        Laptop.Windows windows = (Laptop.Windows) defineLaptopPC();
+
+        windows.connectToServer(desktop);
+        windows.sendMessage("blabla");
+    }
+
+    private static Desktop defineDesktopPC() {
+        System.out.println("Assembling Desktop PC...");
+
         AbstractCircuitBoard[] abstractCircuitBoards = {new MotherBoard(), new Processor(), new RAM(), new VideoCard()};
         Monitor monitorForDesktop = new Monitor();
         Desktop desktop = new Desktop(abstractCircuitBoards, monitorForDesktop);
@@ -20,19 +29,26 @@ public class Main {
         monitorForDesktop.turnMonitor(true);
 
         Desktop.Linux linux = (Desktop.Linux) desktop.getOperationSystem();
-        linux.serverIsActive(true);
+        linux.startServer();
+
+        return desktop;
+    }
+
+    private static OperationSystem defineLaptopPC() {
+        System.out.println("Assembling Laptop PC...");
 
         SystemBlock laptopSystemBlock = new SystemBlock(new MotherBoard(), new Processor(), new RAM(), new VideoCard());
         Monitor laptopMonitor = new Monitor();
         Laptop laptop = new Laptop(laptopSystemBlock, laptopMonitor);
+        laptopSystemBlock.plug(laptopMonitor);
 
         laptopSystemBlock.turnSystemBlock(true);
         laptopMonitor.turnMonitor(true);
 
         Laptop.Windows windows = (Laptop.Windows) laptop.getOperationSystem();
-        windows.clientIsActive(true);
-        windows.connectToServer(desktop);
-        windows.sendMessage("blabla");
+        windows.startClient();
+
+        return windows;
     }
 
 }

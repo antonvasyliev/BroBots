@@ -12,10 +12,6 @@ public class Laptop extends AbstractComputer {
         operationSystem = new Windows();
     }
 
-    public Laptop(AbstractCircuitBoard[] details, Monitor monitor) {
-        super(details, monitor);
-    }
-
     class Windows extends OperationSystem {
 
         private boolean
@@ -23,24 +19,25 @@ public class Laptop extends AbstractComputer {
                 connectionIsEstablished;
 
 
-        public void clientIsActive(boolean isActive) {
-            this.clientIsActive = isActive;
+        void startClient() {
+            this.clientIsActive = true;
+            System.out.println("Client has been started successfully");
         }
 
-        public void connectToServer(Desktop desktop) {
-            if (clientIsActive) {
-                Desktop.Linux linux = (Desktop.Linux) desktop.getOperationSystem();
+        void connectToServer(Desktop desktop) {
+            Desktop.Linux linux = (Desktop.Linux) desktop.getOperationSystem();
+            if (clientIsActive & linux.serverIsActive()) {
                 connectionIsEstablished = linux.establishConnection();
-                System.out.println("Connection is established successfully");
             }
             else {
-                System.out.println("Didn't manage to connect to server: client is not active");
+                System.out.println("Didn't manage to connect to server: client or server is not active");
+                System.exit(0);
             }
 
         }
 
-        public void sendMessage(String message) {
-            System.out.println((connectionIsEstablished) ? "\"" + message + "\"" + " is sent successfully" : "Connection is not established");
+        void sendMessage(String message) {
+            System.out.println((connectionIsEstablished) ? "\"" + message + "\"" + " has been sent successfully" : "Connection is not established");
         }
 
     }

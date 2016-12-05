@@ -7,10 +7,6 @@ import org.brobots.user1.details.AbstractCircuitBoard;
  */
 class Desktop extends AbstractComputer {
 
-    public Desktop(SystemBlock systemBlock, Monitor monitor) {
-        super(systemBlock, monitor);
-    }
-
     Desktop(AbstractCircuitBoard[] details, Monitor monitor) {
         super(details, monitor);
         operationSystem = new Linux();
@@ -20,19 +16,18 @@ class Desktop extends AbstractComputer {
 
         private boolean serverIsActive;
 
-        public void serverIsActive(boolean isActive) {
-            this.serverIsActive = isActive;
+        void startServer() {
+            this.serverIsActive = true;
             System.out.println("Server has been started successfully");
         }
 
-        boolean establishConnection() {
-            if (serverIsActive)
-                return true;
-            else {
-                System.out.println("Server is inactive: please, start the server");
-                return false;
-            }
+        boolean serverIsActive() {
+            return serverIsActive;
+        }
 
+        boolean establishConnection() {
+            System.out.println("Connection is established successfully");
+            return true;
         }
 
     }
