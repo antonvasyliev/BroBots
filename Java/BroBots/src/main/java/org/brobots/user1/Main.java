@@ -25,8 +25,8 @@ public class Main {
         SystemBlock desktopSystemBlock = desktop.getSystemBlock();
         desktopSystemBlock.plug(monitorForDesktop);
 
-        desktopSystemBlock.turnSystemBlock(true);
-        monitorForDesktop.turnMonitor(true);
+        desktopSystemBlock.turnOnSystemBlock();
+        monitorForDesktop.turnOnMonitor();
 
         Desktop.Linux linux = (Desktop.Linux) desktop.getOperationSystem();
         linux.startServer();
@@ -42,8 +42,8 @@ public class Main {
         Laptop laptop = new Laptop(laptopSystemBlock, laptopMonitor);
         laptopSystemBlock.plug(laptopMonitor);
 
-        laptopSystemBlock.turnSystemBlock(true);
-        laptopMonitor.turnMonitor(true);
+        laptopSystemBlock.turnOnSystemBlock();
+        laptopMonitor.turnOnMonitor();
 
         Laptop.Windows windows = (Laptop.Windows) laptop.getOperationSystem();
         windows.startClient();

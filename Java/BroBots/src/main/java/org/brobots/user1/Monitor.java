@@ -11,13 +11,13 @@ class Monitor {
         this.isPlugged = isPlugged;
     }
 
-    void turnMonitor(boolean isActive) {
+    void turnOnMonitor() {
         if (!isPlugged) {
             System.out.println("You didn't plugged monitor to system block");
             System.exit(0);
         }
         else {
-            System.out.println((isActive) ? "Monitor is turned on" : "Monitor is turned off");
+            System.out.println("Monitor is turned on");
         }
     }
 

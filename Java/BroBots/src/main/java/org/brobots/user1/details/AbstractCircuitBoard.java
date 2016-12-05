@@ -7,10 +7,9 @@ public class AbstractCircuitBoard {
 
     private boolean isEnergized;
 
-    public void energize(boolean isEnergized) {
-        this.isEnergized = isEnergized;
-        String className = this.getClass().getSimpleName();
-        System.out.println((isEnergized) ? className + " is turned on" : className + " is turned off");
+    public void energize() {
+        isEnergized = true;
+        System.out.println(this.getClass().getSimpleName() + " is turned on");
     }
 
     public boolean isEnergized() {
